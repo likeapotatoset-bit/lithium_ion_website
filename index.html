@@ -3,21 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>俺の初Webサイト</title>
+    <title>Fragment Archive</title>
     <style>
         body {
-            font-family: sans-serif;
-            background-color: #1a1a2e;
-            color: #e94560;
-            text-align: center;
-            padding-top: 100px;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: monospace, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
         }
-        h1 { font-size: 2.5rem; }
-        p { color: #fff; font-size: 1.2rem; }
+
+        h1 { color: #58a6ff; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
+
+        .fragment {
+            background: #161b22;
+            border: 1px solid #30363d;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+        }
+
+        .hidden { display: none; } /* これで最初は隠しておく */
+
+        /* 隠し要素のスタイル */
+        .secret-spot {
+            color: #30363d; /* 背景とほぼ同じ色にして隠す */
+            cursor: pointer;
+            user-select: none;
+        }
+        .secret-spot:hover { color: #8b949e; } /* ホバーで少し見える */
+
+        input, button {
+            background: #21262d;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        button { cursor: pointer; }
+        button:hover { background: #30363d; }
     </style>
 </head>
 <body>
-    <h1>Hello World!</h1>
-    <p>俺の俺による俺のためのウェブサイト。</p>
+
+    <h1>FRAGMENT // ARCHIVE</h1>
+    <p>散らばった情報を解析中... <span class="secret-spot" onclick="unlockFragment(2)">[?]</span></p>
+
+    <!-- 断片 1 (最初から見えてる) -->
+    <div class="fragment" id="frag-1">
+        <h3>断片 #01: 最初の記憶</h3>
+        <p>ここはログの保管庫。まだロックされている情報が多い。</p>
+        <p>ヒント: F12キーでコンソール（Console）を開くか、コマンドを入力しろ。</p>
+    </div>
+
+    <!-- 断片 2 (クリックで解除) -->
+    <div class="fragment hidden" id="frag-2">
+        <h3>断片 #02: 隠された接続</h3>
+        <p>「[?]」を見つけたな。視覚に頼るな、違和感を探せ。」</p>
+    </div>
+
+    <!-- 断片 3 (パスワード入力で解除) -->
+    <div class="fragment hidden" id="frag-3">
+        <h3>断片 #03: C++の痕跡</h3>
+        <p>「正解だ。メモリの奥底から情報が復元された。」</p>
+    </div>
+
+    <!-- コマンド/パスワード入力エリア -->
+    <div class="fragment">
+        <label for="cmd">コマンド入力:</label><br><br>
+        <input type="text" id="cmd" placeholder="キーワード...">
+        <button onclick="checkCommand()">実行</button>
+    </div>
+
+    <script>
+        // 開発者ツール（Console）に仕掛けを忍ばせる
+        console.log("%c[SYSTEM] 開発者ツールへのアクセスを検出。", "color: #58a6ff; font-weight: bold;");
+        console.log("ヒント: コマンド入力に 'cpp' と打ってみろ。");
+
+        // 断片を解放する関数
+        function unlockFragment(num) {
+            const frag = document.getElementById('frag-' + num);
+            if (frag) {
+                frag.classList.remove('hidden');
+            }
+        }
+
+        // コマンド判定
+        function checkCommand() {
+            const input = document.getElementById('cmd').value.trim().toLowerCase();
+            if (input === 'cpp') {
+                unlockFragment(3);
+                alert('断片 #03 が解除されました！');
+            } else if (input === 'clear') {
+                alert('全データを消去... するわけないやろ。');
+            } else {
+                alert('エラー: 無効なコマンドです。');
+            }
+        }
+    </script>
 </body>
 </html>
