@@ -128,11 +128,13 @@
 
         let keyHistory = "";
         window.addEventListener('keydown', (e) => {
-            keyHistory += e.key;
+            if (e.code.startsWith('Key')) {
+                keyHistory += e.code.replace('Key', '').toLowerCase();
+            }
+    
             if (keyHistory.length > 5) keyHistory = keyHistory.slice(-5);
-            
             if (keyHistory.includes("hack")) {
-                activateDarkMod();
+                    activateDarkMod();
             }
         });
 
